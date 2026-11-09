@@ -3,192 +3,271 @@
         xmlns:vm="using:Calc.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="640"
+        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="730"
         x:Class="Calc.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="Calc — 科学计算器"
-        Width="900" Height="640"
-        MinWidth="760" MinHeight="560"
+        Width="580" Height="730"
+        MinWidth="480" MinHeight="620"
         WindowStartupLocation="CenterScreen"
-        Background="#0D1024"
-        ExtendClientAreaToDecorationsHint="False">
+        ExtendClientAreaToDecorationsHint="False"
+        TransparencyLevelHint="Mica"
+        Background="{x:Null}">
 
   <Design.DataContext>
     <vm:MainViewModel />
   </Design.DataContext>
 
   <Window.Styles>
-    <!-- 数字键 -->
+    <!-- ============ 通用按键外观 ============ -->
     <Style Selector="Button.calc">
-      <Setter Property="Height" Value="50" />
-      <Setter Property="CornerRadius" Value="14" />
-      <Setter Property="FontSize" Value="18" />
+      <Setter Property="Height" Value="52" />
+      <Setter Property="CornerRadius" Value="15" />
+      <Setter Property="FontSize" Value="19" />
       <Setter Property="FontWeight" Value="Medium" />
-      <Setter Property="Background" Value="#1E2340" />
-      <Setter Property="Foreground" Value="#E8EAF6" />
-      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Background" Value="#1C2434" />
+      <Setter Property="Foreground" Value="#E7ECF5" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BorderBrush" Value="#2A364E" />
       <Setter Property="VerticalContentAlignment" Value="Center" />
       <Setter Property="HorizontalContentAlignment" Value="Center" />
     </Style>
     <Style Selector="Button.calc:pointerover /template/ ContentPresenter">
-      <Setter Property="Background" Value="#2A3055" />
+      <Setter Property="Background" Value="#263149" />
+      <Setter Property="BorderBrush" Value="#3A4A6A" />
     </Style>
     <Style Selector="Button.calc:pressed /template/ ContentPresenter">
-      <Setter Property="Background" Value="#363D6B" />
+      <Setter Property="Background" Value="#18202E" />
     </Style>
 
-    <!-- 运算符键 -->
+    <!-- ============ 运算符键（青色） ============ -->
     <Style Selector="Button.op">
-      <Setter Property="Background" Value="#252A4A" />
-      <Setter Property="Foreground" Value="#7DD3FC" />
+      <Setter Property="Background" Value="#1A2E3E" />
+      <Setter Property="Foreground" Value="#5EEAD4" />
       <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="BorderBrush" Value="#274457" />
+      <Setter Property="FontSize" Value="21" />
     </Style>
     <Style Selector="Button.op:pointerover /template/ ContentPresenter">
-      <Setter Property="Background" Value="#303760" />
+      <Setter Property="Background" Value="#223D52" />
+      <Setter Property="BorderBrush" Value="#33607C" />
+    </Style>
+    <Style Selector="Button.op:pressed /template/ ContentPresenter">
+      <Setter Property="Background" Value="#152632" />
     </Style>
 
-    <!-- 函数键 -->
+    <!-- ============ 函数键（靛蓝） ============ -->
     <Style Selector="Button.fn">
-      <Setter Property="Background" Value="#1B2145" />
-      <Setter Property="Foreground" Value="#C4B5FD" />
+      <Setter Property="Background" Value="#1D2340" />
+      <Setter Property="Foreground" Value="#A5B4FC" />
       <Setter Property="FontSize" Value="16" />
+      <Setter Property="BorderBrush" Value="#2E3757" />
     </Style>
     <Style Selector="Button.fn:pointerover /template/ ContentPresenter">
-      <Setter Property="Background" Value="#272E5C" />
+      <Setter Property="Background" Value="#272F55" />
+      <Setter Property="BorderBrush" Value="#414D7D" />
+    </Style>
+    <Style Selector="Button.fn:pressed /template/ ContentPresenter">
+      <Setter Property="Background" Value="#171C33" />
     </Style>
 
-    <!-- 清除/退格键 -->
+    <!-- ============ 清除/退格键（玫瑰红） ============ -->
     <Style Selector="Button.danger">
-      <Setter Property="Background" Value="#3B1D2E" />
-      <Setter Property="Foreground" Value="#FCA5A5" />
+      <Setter Property="Background" Value="#331E2C" />
+      <Setter Property="Foreground" Value="#FB7185" />
+      <Setter Property="BorderBrush" Value="#4C2A3E" />
+      <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
     <Style Selector="Button.danger:pointerover /template/ ContentPresenter">
-      <Setter Property="Background" Value="#4C2539" />
+      <Setter Property="Background" Value="#45283B" />
+      <Setter Property="BorderBrush" Value="#663B54" />
+    </Style>
+    <Style Selector="Button.danger:pressed /template/ ContentPresenter">
+      <Setter Property="Background" Value="#281822" />
     </Style>
 
-    <!-- 等号键 -->
+    <!-- ============ 等号键（紫粉渐变） ============ -->
     <Style Selector="Button.eq">
-      <Setter Property="Background" Value="#6D5BF6" />
       <Setter Property="Foreground" Value="White" />
-      <Setter Property="FontSize" Value="24" />
+      <Setter Property="FontSize" Value="26" />
       <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+          <GradientStop Offset="0" Color="#8B5CF6" />
+          <GradientStop Offset="1" Color="#EC4899" />
+        </LinearGradientBrush>
+      </Setter>
     </Style>
     <Style Selector="Button.eq:pointerover /template/ ContentPresenter">
-      <Setter Property="Background" Value="#7E6EFA" />
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+          <GradientStop Offset="0" Color="#9D71F8" />
+          <GradientStop Offset="1" Color="#F065A8" />
+        </LinearGradientBrush>
+      </Setter>
     </Style>
     <Style Selector="Button.eq:pressed /template/ ContentPresenter">
-      <Setter Property="Background" Value="#5B4AD9" />
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+          <GradientStop Offset="0" Color="#7448E0" />
+          <GradientStop Offset="1" Color="#D63B8B" />
+        </LinearGradientBrush>
+      </Setter>
     </Style>
   </Window.Styles>
 
-  <Grid Margin="24" ColumnDefinitions="*,300" ColumnSpacing="20">
+  <!-- 全局渐变背景 -->
+  <Panel>
+    <Border>
+      <Border.Background>
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+          <GradientStop Offset="0" Color="#0A0F1E" />
+          <GradientStop Offset="0.55" Color="#0E1526" />
+          <GradientStop Offset="1" Color="#111A30" />
+        </LinearGradientBrush>
+      </Border.Background>
+    </Border>
 
-    <!-- ============ 左侧：计算器 ============ -->
-    <Grid Grid.Column="0" RowDefinitions="Auto,Auto,Auto,*" RowSpacing="14">
+    <Grid x:Name="RootGrid" Margin="22" ColumnSpacing="18">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="0" />
+      </Grid.ColumnDefinitions>
 
-      <!-- 标题栏 -->
-      <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
-        <Ellipse Width="12" Height="12" Fill="#F87171" />
-        <Ellipse Width="12" Height="12" Fill="#FBBF24" />
-        <Ellipse Width="12" Height="12" Fill="#34D399" />
-        <TextBlock Text="科学计算器" Margin="12,0,0,0" FontSize="16" FontWeight="SemiBold" Foreground="#B8BEE8" />
-        <Button Content="{Binding ModeText}" Classes="fn calc" Width="64" Height="28" FontSize="13"
-                Command="{Binding ToggleAngleCommand}" CornerRadius="8" Padding="0" />
-      </StackPanel>
+      <!-- ============ 左侧：计算器 ============ -->
+      <Grid Grid.Column="0" RowDefinitions="Auto,Auto,Auto,*" RowSpacing="14">
 
-      <!-- 显示区 -->
-      <Border Grid.Row="1" CornerRadius="18" Padding="22,16" Background="#151A36"
-              BorderBrush="#262D55" BorderThickness="1">
-        <StackPanel Spacing="6">
-          <TextBox Text="{Binding Expression}"
-                   FontSize="24" Foreground="#AEB6E8" Background="Transparent"
-                   BorderThickness="0" TextAlignment="Right" Padding="0"
-                   PlaceholderText="输入表达式，如 2×sin(45)+3^2" MinHeight="36" />
-          <TextBlock Text="{Binding Result}" FontSize="38" FontWeight="Bold"
-                     Foreground="#7DF9D4" TextAlignment="Right" TextWrapping="NoWrap"
-                     TextTrimming="CharacterEllipsis" />
-        </StackPanel>
-      </Border>
+        <!-- 标题栏 -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="12" VerticalAlignment="Center">
+          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+            <Ellipse Width="11" Height="11" Fill="#FB7185" />
+            <Ellipse Width="11" Height="11" Fill="#FBBF24" />
+            <Ellipse Width="11" Height="11" Fill="#34D399" />
+            <TextBlock Text="科学计算器" Margin="10,0,0,0" FontSize="16" FontWeight="SemiBold" Foreground="#AEB8D6" />
+          </StackPanel>
+          <Button Grid.Column="2" Content="{Binding ModeText}" Classes="fn calc" Width="60" Height="30"
+                  FontSize="13" Command="{Binding ToggleAngleCommand}" CornerRadius="9" Padding="0"
+                  ToolTip.Tip="切换角度/弧度模式" />
+          <ToggleButton Grid.Column="3" Classes="calc fn" Height="30" CornerRadius="9" Padding="12,0"
+                        IsChecked="{Binding ShowHistory, Mode=TwoWay}" ToolTip.Tip="显示/隐藏历史记录">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+              <TextBlock Text="☰" FontSize="14" />
+              <TextBlock Text="历史" FontSize="13" />
+            </StackPanel>
+          </ToggleButton>
+        </Grid>
 
-      <!-- 键盘 -->
-      <Border Grid.Row="2" CornerRadius="18" Padding="14" Background="#111530"
-              BorderBrush="#262D55" BorderThickness="1">
-        <Grid ColumnDefinitions="*,*,*,*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="8" RowSpacing="8">
+        <!-- 显示区 -->
+        <Border Grid.Row="1" CornerRadius="18" Padding="22,14" Background="#121A2B"
+                BorderBrush="#233047" BorderThickness="1"
+                BoxShadow="0 8 24 0 #00000040">
+          <StackPanel Spacing="2">
+            <TextBox Text="{Binding Expression}"
+                     FontSize="24" Foreground="#A8B4D4" Background="Transparent"
+                     BorderThickness="0" TextAlignment="Right" Padding="0"
+                     PlaceholderText="输入表达式，如 2×sin(45)+3^2，支持键盘输入" MinHeight="36" />
+            <TextBlock Text="{Binding Preview}" FontSize="17" Foreground="#5A6690"
+                       TextAlignment="Right" TextWrapping="NoWrap"
+                       TextTrimming="CharacterEllipsis" MinHeight="24"
+                       IsVisible="{Binding Preview, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+            <TextBlock Text="{Binding Result}" FontSize="36" FontWeight="Bold"
+                       Foreground="#6EE7C8" TextAlignment="Right" TextWrapping="NoWrap"
+                       TextTrimming="CharacterEllipsis" MinHeight="46"
+                       IsVisible="{Binding Result, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+            <TextBlock Text="{Binding ErrorMessage}" FontSize="13" Foreground="#FB7185"
+                       TextAlignment="Right" TextWrapping="Wrap"
+                       IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+          </StackPanel>
+        </Border>
 
-          <!-- R1 -->
-          <Button Grid.Row="0" Grid.Column="0" Classes="calc fn" Content="{Binding ModeText}" Command="{Binding ToggleAngleCommand}" />
-          <Button Grid.Row="0" Grid.Column="1" Classes="calc op" Content="(" Command="{Binding InsertCommand}" CommandParameter="(" />
-          <Button Grid.Row="0" Grid.Column="2" Classes="calc op" Content=")" Command="{Binding InsertCommand}" CommandParameter=")" />
-          <Button Grid.Row="0" Grid.Column="3" Classes="calc danger" Content="⌫" Command="{Binding BackspaceCommand}" />
-          <Button Grid.Row="0" Grid.Column="4" Classes="calc danger" Content="C" Command="{Binding ClearCommand}" />
+        <!-- 键盘 -->
+        <Border Grid.Row="2" CornerRadius="18" Padding="13" Background="#0F1626"
+                BorderBrush="#202C44" BorderThickness="1"
+                BoxShadow="0 8 24 0 #00000033">
+          <Grid ColumnDefinitions="*,*,*,*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="9" RowSpacing="9">
 
-          <!-- R2 -->
-          <Button Grid.Row="1" Grid.Column="0" Classes="calc fn" Content="sin" Command="{Binding InsertCommand}" CommandParameter="sin(" />
-          <Button Grid.Row="1" Grid.Column="1" Classes="calc fn" Content="cos" Command="{Binding InsertCommand}" CommandParameter="cos(" />
-          <Button Grid.Row="1" Grid.Column="2" Classes="calc fn" Content="tan" Command="{Binding InsertCommand}" CommandParameter="tan(" />
-          <Button Grid.Row="1" Grid.Column="3" Classes="calc op" Content="xʸ" Command="{Binding InsertCommand}" CommandParameter="^" />
-          <Button Grid.Row="1" Grid.Column="4" Classes="calc op" Content="÷" Command="{Binding InsertCommand}" CommandParameter="÷" />
+            <!-- R1 -->
+            <Button Grid.Row="0" Grid.Column="0" Classes="calc fn" Content="{Binding ModeText}" Command="{Binding ToggleAngleCommand}" />
+            <Button Grid.Row="0" Grid.Column="1" Classes="calc op" Content="(" Command="{Binding InsertCommand}" CommandParameter="(" />
+            <Button Grid.Row="0" Grid.Column="2" Classes="calc op" Content=")" Command="{Binding InsertCommand}" CommandParameter=")" />
+            <Button Grid.Row="0" Grid.Column="3" Classes="calc danger" Content="⌫" Command="{Binding BackspaceCommand}" />
+            <Button Grid.Row="0" Grid.Column="4" Classes="calc danger" Content="C" Command="{Binding ClearCommand}" />
 
-          <!-- R3 -->
-          <Button Grid.Row="2" Grid.Column="0" Classes="calc fn" Content="ln" Command="{Binding InsertCommand}" CommandParameter="ln(" />
-          <Button Grid.Row="2" Grid.Column="1" Classes="calc fn" Content="log" Command="{Binding InsertCommand}" CommandParameter="log(" />
-          <Button Grid.Row="2" Grid.Column="2" Classes="calc fn" Content="√" Command="{Binding InsertCommand}" CommandParameter="√(" />
-          <Button Grid.Row="2" Grid.Column="3" Classes="calc op" Content="%" Command="{Binding InsertCommand}" CommandParameter="%" />
-          <Button Grid.Row="2" Grid.Column="4" Classes="calc op" Content="×" Command="{Binding InsertCommand}" CommandParameter="×" />
+            <!-- R2 -->
+            <Button Grid.Row="1" Grid.Column="0" Classes="calc fn" Content="sin" Command="{Binding InsertCommand}" CommandParameter="sin(" />
+            <Button Grid.Row="1" Grid.Column="1" Classes="calc fn" Content="cos" Command="{Binding InsertCommand}" CommandParameter="cos(" />
+            <Button Grid.Row="1" Grid.Column="2" Classes="calc fn" Content="tan" Command="{Binding InsertCommand}" CommandParameter="tan(" />
+            <Button Grid.Row="1" Grid.Column="3" Classes="calc op" Content="xʸ" Command="{Binding InsertCommand}" CommandParameter="^" />
+            <Button Grid.Row="1" Grid.Column="4" Classes="calc op" Content="÷" Command="{Binding InsertCommand}" CommandParameter="÷" />
 
-          <!-- R4 -->
-          <Button Grid.Row="3" Grid.Column="0" Classes="calc fn" Content="π" Command="{Binding InsertCommand}" CommandParameter="π" />
-          <Button Grid.Row="3" Grid.Column="1" Classes="calc" Content="7" Command="{Binding InsertCommand}" CommandParameter="7" />
-          <Button Grid.Row="3" Grid.Column="2" Classes="calc" Content="8" Command="{Binding InsertCommand}" CommandParameter="8" />
-          <Button Grid.Row="3" Grid.Column="3" Classes="calc" Content="9" Command="{Binding InsertCommand}" CommandParameter="9" />
-          <Button Grid.Row="3" Grid.Column="4" Classes="calc op" Content="−" Command="{Binding InsertCommand}" CommandParameter="−" />
+            <!-- R3 -->
+            <Button Grid.Row="2" Grid.Column="0" Classes="calc fn" Content="ln" Command="{Binding InsertCommand}" CommandParameter="ln(" />
+            <Button Grid.Row="2" Grid.Column="1" Classes="calc fn" Content="log" Command="{Binding InsertCommand}" CommandParameter="log(" />
+            <Button Grid.Row="2" Grid.Column="2" Classes="calc fn" Content="√" Command="{Binding InsertCommand}" CommandParameter="√(" />
+            <Button Grid.Row="2" Grid.Column="3" Classes="calc op" Content="%" Command="{Binding InsertCommand}" CommandParameter="%" />
+            <Button Grid.Row="2" Grid.Column="4" Classes="calc op" Content="×" Command="{Binding InsertCommand}" CommandParameter="×" />
 
-          <!-- R5 -->
-          <Button Grid.Row="4" Grid.Column="0" Classes="calc fn" Content="e" Command="{Binding InsertCommand}" CommandParameter="e" />
-          <Button Grid.Row="4" Grid.Column="1" Classes="calc" Content="4" Command="{Binding InsertCommand}" CommandParameter="4" />
-          <Button Grid.Row="4" Grid.Column="2" Classes="calc" Content="5" Command="{Binding InsertCommand}" CommandParameter="5" />
-          <Button Grid.Row="4" Grid.Column="3" Classes="calc" Content="6" Command="{Binding InsertCommand}" CommandParameter="6" />
-          <Button Grid.Row="4" Grid.Column="4" Classes="calc op" Content="+" Command="{Binding InsertCommand}" CommandParameter="+" />
+            <!-- R4 -->
+            <Button Grid.Row="3" Grid.Column="0" Classes="calc fn" Content="π" Command="{Binding InsertCommand}" CommandParameter="π" />
+            <Button Grid.Row="3" Grid.Column="1" Classes="calc" Content="7" Command="{Binding InsertCommand}" CommandParameter="7" />
+            <Button Grid.Row="3" Grid.Column="2" Classes="calc" Content="8" Command="{Binding InsertCommand}" CommandParameter="8" />
+            <Button Grid.Row="3" Grid.Column="3" Classes="calc" Content="9" Command="{Binding InsertCommand}" CommandParameter="9" />
+            <Button Grid.Row="3" Grid.Column="4" Classes="calc op" Content="−" Command="{Binding InsertCommand}" CommandParameter="−" />
 
-          <!-- R6 -->
-          <Button Grid.Row="5" Grid.Column="0" Classes="calc fn" Content="n!" Command="{Binding InsertCommand}" CommandParameter="!" />
-          <Button Grid.Row="5" Grid.Column="1" Classes="calc" Content="1" Command="{Binding InsertCommand}" CommandParameter="1" />
-          <Button Grid.Row="5" Grid.Column="2" Classes="calc" Content="2" Command="{Binding InsertCommand}" CommandParameter="2" />
-          <Button Grid.Row="5" Grid.Column="3" Classes="calc" Content="3" Command="{Binding InsertCommand}" CommandParameter="3" />
-          <Button Grid.Row="5" Grid.Column="4" Grid.RowSpan="2" Classes="calc eq" Content="=" Command="{Binding EqualsCommand}" />
+            <!-- R5 -->
+            <Button Grid.Row="4" Grid.Column="0" Classes="calc fn" Content="e" Command="{Binding InsertCommand}" CommandParameter="e" />
+            <Button Grid.Row="4" Grid.Column="1" Classes="calc" Content="4" Command="{Binding InsertCommand}" CommandParameter="4" />
+            <Button Grid.Row="4" Grid.Column="2" Classes="calc" Content="5" Command="{Binding InsertCommand}" CommandParameter="5" />
+            <Button Grid.Row="4" Grid.Column="3" Classes="calc" Content="6" Command="{Binding InsertCommand}" CommandParameter="6" />
+            <Button Grid.Row="4" Grid.Column="4" Classes="calc op" Content="+" Command="{Binding InsertCommand}" CommandParameter="+" />
 
-          <!-- R7 -->
-          <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Classes="calc" Content="0" Command="{Binding InsertCommand}" CommandParameter="0" />
-          <Button Grid.Row="6" Grid.Column="2" Classes="calc" Content="." Command="{Binding InsertCommand}" CommandParameter="." />
-          <Button Grid.Row="6" Grid.Column="3" Classes="calc fn" Content="abs" Command="{Binding InsertCommand}" CommandParameter="abs(" />
+            <!-- R6 -->
+            <Button Grid.Row="5" Grid.Column="0" Classes="calc fn" Content="n!" Command="{Binding InsertCommand}" CommandParameter="!" />
+            <Button Grid.Row="5" Grid.Column="1" Classes="calc" Content="1" Command="{Binding InsertCommand}" CommandParameter="1" />
+            <Button Grid.Row="5" Grid.Column="2" Classes="calc" Content="2" Command="{Binding InsertCommand}" CommandParameter="2" />
+            <Button Grid.Row="5" Grid.Column="3" Classes="calc" Content="3" Command="{Binding InsertCommand}" CommandParameter="3" />
+            <Button Grid.Row="5" Grid.Column="4" Grid.RowSpan="2" Classes="calc eq" Content="=" Command="{Binding EqualsCommand}" />
+
+            <!-- R7 -->
+            <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Classes="calc" Content="0" Command="{Binding InsertCommand}" CommandParameter="0" />
+            <Button Grid.Row="6" Grid.Column="2" Classes="calc" Content="." Command="{Binding InsertCommand}" CommandParameter="." />
+            <Button Grid.Row="6" Grid.Column="3" Classes="calc fn" Content="Ans" Command="{Binding InsertCommand}" CommandParameter="ans" ToolTip.Tip="插入上次计算结果" />
+          </Grid>
+        </Border>
+      </Grid>
+
+      <!-- ============ 右侧：历史记录（可开合） ============ -->
+      <Border x:Name="HistoryPanel" Grid.Column="1" CornerRadius="18" Background="#0F1626"
+              BorderBrush="#202C44" BorderThickness="1" Padding="14"
+              BoxShadow="0 8 24 0 #00000033" IsVisible="False">
+        <Grid RowDefinitions="Auto,*,Auto" RowSpacing="10">
+          <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="4,2,0,0">
+            <TextBlock Text="历史记录" FontSize="15" FontWeight="SemiBold"
+                       Foreground="#AEB8D6" VerticalAlignment="Center" />
+            <Button Grid.Column="1" Content="清空" Classes="fn calc" FontSize="12" Height="26"
+                    Padding="10,0" CornerRadius="8" Foreground="#FB7185"
+                    Command="{Binding ClearHistoryCommand}" />
+          </Grid>
+
+          <ListBox Grid.Row="1" ItemsSource="{Binding History}" Background="Transparent"
+                   BorderThickness="0" x:Name="HistoryList">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <Button Content="{Binding}" HorizontalContentAlignment="Left"
+                        HorizontalAlignment="Stretch" Background="Transparent"
+                        BorderThickness="0" Padding="6,5" FontSize="13" Foreground="#A8B4D4"
+                        Command="{Binding $parent[ListBox].((vm:MainViewModel)DataContext).UseHistoryCommand}"
+                        CommandParameter="{Binding}" />
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+
+          <TextBlock Grid.Row="2" Text="点击记录可回填表达式" FontSize="12"
+                     Foreground="#525E85" Margin="4,0,0,2" />
         </Grid>
       </Border>
     </Grid>
-
-    <!-- ============ 右侧：历史记录 ============ -->
-    <Border Grid.Column="1" CornerRadius="18" Background="#111530"
-            BorderBrush="#262D55" BorderThickness="1" Padding="14">
-      <Grid RowDefinitions="Auto,*,Auto" RowSpacing="10">
-        <TextBlock Grid.Row="0" Text="历史记录" FontSize="15" FontWeight="SemiBold"
-                   Foreground="#B8BEE8" Margin="4,2,0,0" />
-
-        <ListBox Grid.Row="1" ItemsSource="{Binding History}" Background="Transparent"
-                 BorderThickness="0" x:Name="HistoryList">
-          <ListBox.ItemTemplate>
-            <DataTemplate>
-              <Button Content="{Binding}" HorizontalContentAlignment="Left"
-                      HorizontalAlignment="Stretch" Background="Transparent"
-                      BorderThickness="0" Padding="6,4" FontSize="13" Foreground="#AEB6E8"
-                      Command="{Binding $parent[ListBox].((vm:MainViewModel)DataContext).UseHistoryCommand}"
-                      CommandParameter="{Binding}" />
-            </DataTemplate>
-          </ListBox.ItemTemplate>
-        </ListBox>
-
-        <TextBlock Grid.Row="2" Text="点击记录可回填表达式" FontSize="12"
-                   Foreground="#5A6194" Margin="4,0,0,2" />
-      </Grid>
-    </Border>
-  </Grid>
+  </Panel>
 </Window>

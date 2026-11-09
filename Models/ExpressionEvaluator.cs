@@ -13,6 +13,9 @@ public class ExpressionEvaluator
 {
     public bool DegreeMode { get; set; } = false;
 
+    /// <summary>上次计算结果，供表达式中的 ans 引用</summary>
+    public double LastAnswer { get; set; }
+
     private string _input = "";
     private int _pos;
 
@@ -157,6 +160,8 @@ public class ExpressionEvaluator
                 return Math.PI;
             case "e":
                 return Math.E;
+            case "ans":
+                return LastAnswer;
         }
 
         // 函数调用：可带括号，也支持 "sin30" 形式
